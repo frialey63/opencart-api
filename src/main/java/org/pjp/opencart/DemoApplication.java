@@ -2,8 +2,8 @@ package org.pjp.opencart;
 
 import org.pjp.opencart.api.Currency;
 import org.pjp.opencart.api.OpenCart;
-import org.pjp.opencart.api.bean.Customer;
 import org.pjp.opencart.api.bean.Address;
+import org.pjp.opencart.api.bean.Customer;
 import org.pjp.opencart.api.bean.Voucher;
 import org.pjp.opencart.api.exception.CartException;
 import org.pjp.opencart.api.exception.OrderException;
@@ -11,6 +11,7 @@ import org.pjp.opencart.db.Camera;
 import org.pjp.opencart.db.ProductDatabase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,11 +19,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
 
-    private static final String USERNAME = "eclipse";
+    private static final String LOCALHOST = "localhost";
 
-    private static final String KEY = "8uIXHOvT5PjAR4oBFN7cXORsEkWOOO3ZdiSAa2qtzClKo0CB5B8iInED3XkdNCaz6Afd4oPpSGT4tzXYXNVP5A7VOhCFQMZKpt4NDEUpuSVEUctdSiZ2KELV1D433yTuxxdT6BSyFMtyCuCzp5dYCnv6My61QB1zv1GW7qj3fhPbpdAbiYI5nUrc5sbUNszVy5paoWxXNrlH1OeBOjirocDjbw3JCb45ghiF2uWTGqPrqYUd4XDtAJUTicjt2H1S";
+	private static final Logger LOGGER = LoggerFactory.getLogger(DemoApplication.class);
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DemoApplication.class);
+    @Value("${opencart.api.username}")
+    private String username;
+
+    @Value("${opencart.api.key}")
+    private String key;
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
@@ -30,9 +35,9 @@ public class DemoApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        OpenCart openCart = new OpenCart("localhost");
+        OpenCart openCart = new OpenCart(LOCALHOST);
 
-        if (openCart.login(USERNAME, KEY)) {
+        if (openCart.login(username, key)) {
             System.out.println("currency USD = " + openCart.currency(Currency.USD));
 
             System.out.println("coupon = " + openCart.coupon(2222));
@@ -70,7 +75,7 @@ public class DemoApplication implements CommandLineRunner {
             }
 
         } else {
-            System.err.println("unable to login with username of " + USERNAME);
+            System.err.println("unable to login with username of " + username);
         }
     }
 
