@@ -1,5 +1,5 @@
 # opencart-api
-A Java library for the OpenCart (free) API
+A Java library for the [OpenCart (free) API](https://docs.opencart.com/en-gb/system/users/api/)
 
 The free API is rather limited in scope but just enough there to programmatically create an order.
 Within the order sub-API it appears that only add is implemented.
