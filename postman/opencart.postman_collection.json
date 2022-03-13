@@ -1,0 +1,983 @@
+{
+	"info": {
+		"_postman_id": "b1047b50-b38f-4391-9805-2768a31b78a8",
+		"name": "opencart",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "paul",
+							"type": "text"
+						},
+						{
+							"key": "key",
+							"value": "rTGDYgu0xWKM62C81aNAcWzKb071VImJoN4yzMvs58QLl448uWEilKnfNeXt3Ad2R21ChP4YRWYWetLwA8KGBguSI2ECjLIaNCfBaRm31IVsqV6KcXvUPJxY3qSfTKRZjYcVGXuLU4eGtR3peZbjlYE6PlzFDouOBCrSv3vmLJryOeMV1ShkeB13dRxZBfXkBKwU04bfMBHZ6WLasSVlVHIDd10EXxu6uidHmWwLuquSaiawKMAGdSLTiQ18BNmV",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/index.php?route=api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "route",
+							"value": "api/login"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "currency",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "currency",
+							"value": "USD",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/index.php?route=api/currency&api_token={{api_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "route",
+							"value": "api/currency"
+						},
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cart/add",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "product_id",
+							"value": "30",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "option[226]",
+							"value": "15",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/index.php?route=api/cart/add&api_token={{api_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "route",
+							"value": "api/cart/add"
+						},
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cart/edit",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "key",
+							"value": "163",
+							"description": "cart_id",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/index.php?route=api/cart/edit&api_token={{api_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "route",
+							"value": "api/cart/edit"
+						},
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cart/remove",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "key",
+							"value": "213",
+							"description": "cart_id",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/index.php?route=api/cart/remove&api_token={{api_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "route",
+							"value": "api/cart/remove"
+						},
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "products",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost/index.php?route=api/cart/products&api_token={{api_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "route",
+							"value": "api/cart/products"
+						},
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "customer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "firstname",
+							"value": "Fred",
+							"type": "text"
+						},
+						{
+							"key": "lastname",
+							"value": "Bloggs",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "fred.bloggs@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "telephone",
+							"value": "999",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/index.php?route=api/customer&api_token={{api_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "route",
+							"value": "api/customer"
+						},
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "shipping/address",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "firstname",
+							"value": "Fred",
+							"type": "text"
+						},
+						{
+							"key": "lastname",
+							"value": "Bloggs",
+							"type": "text"
+						},
+						{
+							"key": "address_1",
+							"value": "123 The Street",
+							"type": "text"
+						},
+						{
+							"key": "city",
+							"value": "London",
+							"type": "text"
+						},
+						{
+							"key": "country_id",
+							"value": "UK",
+							"type": "text"
+						},
+						{
+							"key": "zone_id",
+							"value": "NW6",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/index.php?route=api/shipping/address&api_token={{api_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "route",
+							"value": "api/shipping/address"
+						},
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "shipping/methods",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost/index.php?route=api/shipping/methods&api_token={{api_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "route",
+							"value": "api/shipping/methods"
+						},
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "shipping/method",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "shipping_method",
+							"value": "flat.flat",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/index.php?route=api/shipping/method&api_token={{api_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "route",
+							"value": "api/shipping/method"
+						},
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "payment/address",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "firstname",
+							"value": "Fred",
+							"type": "text"
+						},
+						{
+							"key": "lastname",
+							"value": "Bloggs",
+							"type": "text"
+						},
+						{
+							"key": "address_1",
+							"value": "123 The Street",
+							"type": "text"
+						},
+						{
+							"key": "city",
+							"value": "London",
+							"type": "text"
+						},
+						{
+							"key": "country_id",
+							"value": "UK",
+							"type": "text"
+						},
+						{
+							"key": "zone_id",
+							"value": "NW6",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/index.php?route=api/payment/address&api_token={{api_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "route",
+							"value": "api/payment/address"
+						},
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "payment/methods",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost/index.php?route=api/payment/methods&api_token={{api_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "route",
+							"value": "api/payment/methods"
+						},
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "payment/method",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "payment_method",
+							"value": "cod",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/index.php?route=api/payment/method&api_token={{api_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "route",
+							"value": "api/payment/method"
+						},
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "order/add",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost/index.php?route=api/order/add&api_token={{api_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "route",
+							"value": "api/order/add"
+						},
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "order/edit",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost/index.php?route=api/order/edit&api_token={{api_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "route",
+							"value": "api/order/edit"
+						},
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "order/delete",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost/index.php?route=api/order/delete&api_token={{api_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "route",
+							"value": "api/order/delete"
+						},
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "order/info",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost/index.php?route=api/order/info&api_token={{api_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "route",
+							"value": "api/order/info"
+						},
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "order/history",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost/index.php?route=api/order/history&api_token={{api_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "route",
+							"value": "api/order/history"
+						},
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "coupon",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "coupon",
+							"value": "2222",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/index.php?route=api/coupon&api_token={{api_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "route",
+							"value": "api/coupon"
+						},
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reward",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "reward",
+							"value": "10",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/index.php?route=api/reward&api_token={{api_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "route",
+							"value": "api/reward"
+						},
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reward/maximum",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost/index.php?route=api/reward/maximum&api_token={{api_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "route",
+							"value": "api/reward/maximum"
+						},
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reward/available",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost/index.php?route=api/reward/available&api_token={{api_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "route",
+							"value": "api/reward/available"
+						},
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "voucher",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "voucher",
+							"value": "VOU-7271",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/index.php?route=api/voucher&api_token={{api_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "route",
+							"value": "api/voucher"
+						},
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "voucher/add",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "from_name",
+							"value": "Fred Bloggs",
+							"type": "text"
+						},
+						{
+							"key": "from_email",
+							"value": "fred.bloggs@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "to_name",
+							"value": "Ronnie Scott",
+							"type": "text"
+						},
+						{
+							"key": "to_email",
+							"value": "ronnie.scott@hotmail.com",
+							"type": "text"
+						},
+						{
+							"key": "amount",
+							"value": "100",
+							"type": "text"
+						},
+						{
+							"key": "code",
+							"value": "VOU-7177",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/index.php?route=api/voucher/add&api_token={{api_token}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "route",
+							"value": "api/voucher/add"
+						},
+						{
+							"key": "api_token",
+							"value": "{{api_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
