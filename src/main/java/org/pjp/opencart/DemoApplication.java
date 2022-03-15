@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
@@ -33,9 +35,16 @@ public class DemoApplication implements CommandLineRunner {
         SpringApplication.run(DemoApplication.class, args);
     }
 
+    @Bean
+    private RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+
     @Override
     public void run(String... args) throws Exception {
         OpenCart openCart = new OpenCart(LOCALHOST);
+        
+        openCart.setRestTemplate(restTemplate());
 
         if (openCart.login(username, key)) {
             System.out.println("currency USD = " + openCart.currency(Currency.USD));

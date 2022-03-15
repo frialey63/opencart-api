@@ -7,7 +7,12 @@ public final class Login extends Result {
     @JsonProperty("api_token")
     private String apiToken;
 
-    public String getApiToken() {
+    public Login(String apiToken) {
+		super();
+		this.apiToken = apiToken;
+	}
+
+	public String getApiToken() {
         return apiToken;
     }
 

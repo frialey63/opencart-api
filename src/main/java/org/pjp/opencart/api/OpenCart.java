@@ -28,6 +28,8 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import com.google.common.annotations.VisibleForTesting;
+
 public class OpenCart {
 
     public class Cart {
@@ -246,11 +248,19 @@ public class OpenCart {
 
     }
 
+    @VisibleForTesting
+	static HttpHeaders createHeaders() {
+		HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+		return headers;
+	}
+
     private static final Logger LOGGER = LoggerFactory.getLogger(OpenCart.class);
 
     private final String host;
 
-    private Login login;
+    @VisibleForTesting
+    Login login;
 
     private Result lastResult;
 
@@ -258,21 +268,19 @@ public class OpenCart {
 
     private Order order;
 
-    private static RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
+    private RestTemplate restTemplate;
 
     public OpenCart(String host) {
         super();
         this.host = host;
     }
 
-    public boolean login(String username, String key) {
-        String url = getApi() + "login";
+    public void setRestTemplate(RestTemplate restTemplate) {
+		this.restTemplate = restTemplate;
+	}
 
-        // create headers
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+	public boolean login(String username, String key) {
+        String url = getApi() + "login";
 
         // request body form parameters
         MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
@@ -280,11 +288,11 @@ public class OpenCart {
         map.add("key", key);
 
         // build the request
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, createHeaders());
 
         try {
             // send POST request
-            ResponseEntity<Login> response = restTemplate().postForEntity(url, request, Login.class);
+            ResponseEntity<Login> response = restTemplate.postForEntity(url, request, Login.class);
 
             // check response
             if (response.getStatusCode() == HttpStatus.OK) {
@@ -553,14 +561,13 @@ public class OpenCart {
         }
 
         // create headers
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        HttpHeaders headers = createHeaders();
 
         // build the request
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
 
         // send POST request
-        return restTemplate().postForEntity(url, request, clazz, login.getApiToken());
+        return restTemplate.postForEntity(url, request, clazz, login.getApiToken());
     }
 
     public Cart getCart() {
@@ -575,7 +582,8 @@ public class OpenCart {
         return lastResult;
     }
 
-    private String getApi() {
+    @VisibleForTesting
+    String getApi() {
         return String.format("http://%s/index.php?route=api/", host);
     }
 

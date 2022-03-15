@@ -1,6 +1,13 @@
 package org.pjp.opencart.api.bean;
 
 public class Result {
+	
+	public static Result create(String success, Object error) {
+		Result result = new Result();
+		result.setSuccess(success);
+		result.setError(error);
+		return result;
+	}
 
     private String success;
 
@@ -10,7 +17,7 @@ public class Result {
         return (success != null) || (error == null);
     }
 
-    public String getSuccess() {
+	public String getSuccess() {
         return success;
     }
 
