@@ -10,7 +10,13 @@ public class Reward extends Result {
         super();
     }
 
-    public int getMaximum() {
+    public Reward(int maximum, String points) {
+		super();
+		this.maximum = maximum;
+		this.points = points;
+	}
+
+	public int getMaximum() {
         return maximum;
     }
 

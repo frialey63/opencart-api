@@ -554,17 +554,10 @@ public class OpenCart {
     }
 
     private <T> ResponseEntity<T> performPostRequest(String route, MultiValueMap<String, String> map, Class<T> clazz) {
-        String url = getApi() + route;
+        String url = getApi() + route + "&api_token={apiToken}";
 
-        if (!"login".equals(route)) {
-            url += "&api_token={apiToken}";
-        }
-
-        // create headers
-        HttpHeaders headers = createHeaders();
-
-        // build the request
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
+        // create headers and build the request
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, createHeaders());
 
         // send POST request
         return restTemplate.postForEntity(url, request, clazz, login.getApiToken());
