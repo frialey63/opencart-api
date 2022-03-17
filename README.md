@@ -6,9 +6,8 @@ Within the order sub-API it appears that only add is implemented.
 
 The API assumes a call sequence which matches the wizard style interaction of the web store for creation of an order, see example driver program.
 
-Note to successfully add a product to the shopping cart it is necessary to have knowledge of the product ID and associated options, these may be gleaned by inspecting the page source when browsing a product of interest in the web store.
-
-At the time of writing this is raw code only, sorry no JUnit test cases.
+Note to successfully add a product to the shopping cart it is necessary to have knowledge of the product ID and associated options (these may be gleaned by inspecting the page source when browsing a product of interest in the web store).
+The lack of product search and identification through the free API initially seemed a show stopper but for basic integration it is reasonable to manually map opencart products into an external store's database.
 
 ## Development & Test Environment
 
@@ -20,7 +19,7 @@ Register at opencart.com and follow the instructions in the following link to ge
 
 [Signature hash does not match](https://webocreation.com/blog/signature-hash-not-match-opencart-solution/)
 
-Login to your OpenCart on the /admin URL as user/bitnami and navigate to Users|API and add an API user including generation of the key for this user, see
+Login to your OpenCart on the /admin URL as user/bitnami and navigate to Users|API and add an API user including generation of the API key for this user, see
 
 [How to use Opencart API](https://www.youtube.com/watch?v=bc2govdEiuA)
 

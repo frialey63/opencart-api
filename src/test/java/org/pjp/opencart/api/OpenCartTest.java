@@ -1,7 +1,9 @@
 package org.pjp.opencart.api;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -62,6 +64,10 @@ public class OpenCartTest {
         	.thenReturn(new ResponseEntity<Login>(login, HttpStatus.OK));
           
         assertTrue(openCart.login(username, key));
+        assertNotNull(openCart.login);
+        assertNotNull(openCart.getCart());
+        assertNotNull(openCart.getOrder());
+        assertNull(openCart.getLastResult());
 	}
 
 	@Test
@@ -79,6 +85,7 @@ public class OpenCartTest {
         	.thenReturn(new ResponseEntity<Result>(result, HttpStatus.OK));
           
         assertTrue(openCart.currency(currency));
+        assertNotNull(openCart.getLastResult());
 	}
 
 	@Test
@@ -96,6 +103,7 @@ public class OpenCartTest {
         	.thenReturn(new ResponseEntity<Result>(result, HttpStatus.OK));
           
         assertTrue(openCart.coupon(coupon));
+        assertNotNull(openCart.getLastResult());
 	}
 
 	@Test
@@ -116,6 +124,7 @@ public class OpenCartTest {
         	.thenReturn(new ResponseEntity<Result>(result, HttpStatus.OK));
           
         assertTrue(openCart.customer(customer));
+        assertNotNull(openCart.getLastResult());
 	}
 
 	@Test
@@ -133,6 +142,7 @@ public class OpenCartTest {
         	.thenReturn(new ResponseEntity<Result>(result, HttpStatus.OK));
           
         assertTrue(openCart.voucher(voucher));
+        assertNotNull(openCart.getLastResult());
 	}
 
 	@Test
@@ -155,6 +165,8 @@ public class OpenCartTest {
         	.thenReturn(new ResponseEntity<Result>(result, HttpStatus.OK));
           
         assertTrue(openCart.addVoucher(voucher));
+        assertNotNull(openCart.getLastResult());
+        assertNotNull(openCart.getLastResult());
 	}
 
 	@Test
@@ -177,6 +189,7 @@ public class OpenCartTest {
         	.thenReturn(new ResponseEntity<Result>(result, HttpStatus.OK));
           
         assertTrue(openCart.shippingAddress(address));
+        assertNotNull(openCart.getLastResult());
 	}
 
 	@Test
@@ -196,6 +209,7 @@ public class OpenCartTest {
         	.thenReturn(new ResponseEntity<ShippingMethodsWrapper>(expected, HttpStatus.OK));
           
         assertEquals(expected, openCart.shippingMethods());
+        assertNotNull(openCart.getLastResult());
 	}
 
 	@Test
@@ -213,6 +227,7 @@ public class OpenCartTest {
         	.thenReturn(new ResponseEntity<Result>(result, HttpStatus.OK));
           
         assertTrue(openCart.shippingMethod(shippingMethod));
+        assertNotNull(openCart.getLastResult());
 	}
 
 	@Test
@@ -230,6 +245,7 @@ public class OpenCartTest {
         	.thenReturn(new ResponseEntity<Result>(result, HttpStatus.OK));
           
         assertTrue(openCart.reward(reward));
+        assertNotNull(openCart.getLastResult());
 	}
 
 	@Test
@@ -246,6 +262,7 @@ public class OpenCartTest {
         	.thenReturn(new ResponseEntity<Reward>(reward, HttpStatus.OK));
           
         assertEquals(reward.getMaximum(), openCart.rewardMaximum());
+        assertNotNull(openCart.getLastResult());
 	}
 
 	@Test
@@ -262,6 +279,7 @@ public class OpenCartTest {
         	.thenReturn(new ResponseEntity<Reward>(reward, HttpStatus.OK));
           
         assertEquals(reward.getPoints(), openCart.rewardAvailable());
+        assertNotNull(openCart.getLastResult());
 	}
 
 	@Test
@@ -284,6 +302,7 @@ public class OpenCartTest {
         	.thenReturn(new ResponseEntity<Result>(result, HttpStatus.OK));
           
         assertTrue(openCart.paymentAddress(address));
+        assertNotNull(openCart.getLastResult());
 	}
 
 	@Test
@@ -305,6 +324,7 @@ public class OpenCartTest {
         	.thenReturn(new ResponseEntity<PaymentMethodsWrapper>(expected, HttpStatus.OK));
           
         assertEquals(expected, openCart.paymentMethods());
+        assertNotNull(openCart.getLastResult());
 	}
 
 	@Test
@@ -322,6 +342,7 @@ public class OpenCartTest {
         	.thenReturn(new ResponseEntity<Result>(result, HttpStatus.OK));
           
         assertTrue(openCart.paymentMethod(paymentMethod));
+        assertNotNull(openCart.getLastResult());
 	}
 
 }

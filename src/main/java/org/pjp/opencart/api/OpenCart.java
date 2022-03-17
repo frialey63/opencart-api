@@ -1,5 +1,7 @@
 package org.pjp.opencart.api;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -29,16 +31,19 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.collect.Maps;
 
 public class OpenCart {
 
     public class Cart {
 
         public Cart add(int productId, int quantity, Map<Integer, Integer> options) throws CartException {
+            options = checkNotNull(options, "options must not be null");
+
             MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
             map.add("product_id", Integer.toString(productId));
             map.add("quantity", Integer.toString(quantity));
-
+            
             for (Entry<Integer, Integer> option : options.entrySet()) {
                 map.add(String.format("option[%d]", option.getKey()), option.getValue().toString());
             }
@@ -61,6 +66,10 @@ public class OpenCart {
                 LOGGER.error(msg);
                 throw new StatusException(msg);
             }
+        }
+
+        public Cart add(int productId, int quantity) throws CartException {
+        	return add(productId, quantity, Maps.newHashMap());
         }
 
         public Cart edit(int cartId, int quantity) throws CartException {
@@ -280,6 +289,9 @@ public class OpenCart {
 	}
 
 	public boolean login(String username, String key) {
+		username = checkNotNull(username, "username cannot be null");
+		key = checkNotNull(key, "key cannot be null");
+		
         String url = getApi() + "login";
 
         // request body form parameters
@@ -312,7 +324,9 @@ public class OpenCart {
     }
 
     public boolean currency(Currency currency) {
-        MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
+    	currency = checkNotNull(currency, "currency cannot be null");
+
+		MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
         map.add("currency", currency.name());
 
         ResponseEntity<Result> response = performPostRequest("currency", map, Result.class);
@@ -344,6 +358,8 @@ public class OpenCart {
     }
 
     public boolean customer(Customer customer) {
+    	customer = checkNotNull(customer, "customer cannot be null");
+
         MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
         map.add("firstname", customer.getFirstname());
         map.add("lastname", customer.getLastname());
@@ -363,6 +379,8 @@ public class OpenCart {
     }
 
     public boolean voucher(String voucher) {
+    	voucher = checkNotNull(voucher, "voucher cannot be null");
+
         MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
         map.add("voucher", voucher);
 
@@ -379,6 +397,8 @@ public class OpenCart {
     }
 
     public boolean addVoucher(Voucher voucher) {
+    	voucher = checkNotNull(voucher, "voucher cannot be null");
+
         MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
         map.add("from_name", voucher.getFromName());
         map.add("from_email", voucher.getFromEmail());
@@ -400,6 +420,8 @@ public class OpenCart {
     }
 
     public boolean shippingAddress(Address address) {
+    	address = checkNotNull(address, "address cannot be null");
+
         MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
         map.add("firstname", address.getFirstname());
         map.add("lastname", address.getLastname());
@@ -440,6 +462,8 @@ public class OpenCart {
     }
 
     public boolean shippingMethod(String code) {
+    	code = checkNotNull(code, "code cannot be null");
+
         MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
         map.add("shipping_method", code);
 
@@ -498,6 +522,8 @@ public class OpenCart {
     }
 
     public boolean paymentAddress(Address address) {
+    	address = checkNotNull(address, "address cannot be null");
+
         MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
         map.add("firstname", address.getFirstname());
         map.add("lastname", address.getLastname());
@@ -538,6 +564,8 @@ public class OpenCart {
     }
 
     public boolean paymentMethod(String code) {
+    	code = checkNotNull(code, "code cannot be null");
+
         MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
         map.add("payment_method", code);
 
