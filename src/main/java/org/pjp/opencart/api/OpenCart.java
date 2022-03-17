@@ -273,9 +273,11 @@ public class OpenCart {
 
     private Result lastResult;
 
-    private Cart cart;
+    @VisibleForTesting
+    Cart cart;
 
-    private Order order;
+    @VisibleForTesting
+    Order order;
 
     private RestTemplate restTemplate;
 

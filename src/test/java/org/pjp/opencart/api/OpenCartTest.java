@@ -1,6 +1,7 @@
 package org.pjp.opencart.api;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -22,11 +23,13 @@ import org.pjp.opencart.api.bean.payment.COD;
 import org.pjp.opencart.api.bean.payment.FreeCheckout;
 import org.pjp.opencart.api.bean.payment.PPStandard;
 import org.pjp.opencart.api.bean.shipping.Flat;
+import org.pjp.opencart.api.exception.StatusException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 public class OpenCartTest {
@@ -63,11 +66,56 @@ public class OpenCartTest {
         Mockito.when(restTemplate.postForEntity(openCart.getApi() + "login", request, Login.class))
         	.thenReturn(new ResponseEntity<Login>(login, HttpStatus.OK));
           
+    	openCart.login = null;	// for login() undo the assignment made in the before()
+    	
         assertTrue(openCart.login(username, key));
         assertNotNull(openCart.login);
         assertNotNull(openCart.getCart());
         assertNotNull(openCart.getOrder());
         assertNull(openCart.getLastResult());
+	}
+
+    @Test
+    public void testNoLogin() {
+        String username = "fred";
+        String key = "API-KEY";
+        
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
+        map.add("username", username);
+        map.add("key", key);
+        
+        // build the request
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, OpenCart.createHeaders());
+        
+        Mockito.when(restTemplate.postForEntity(openCart.getApi() + "login", request, Login.class))
+        	.thenThrow(RestClientException.class);
+          
+    	openCart.login = null;	// for login() undo the assignment made in the before()
+    	
+        assertFalse(openCart.login(username, key));
+        assertNull(openCart.login);
+        assertNull(openCart.getCart());
+        assertNull(openCart.getOrder());
+        assertNull(openCart.getLastResult());
+	}
+
+    @Test(expected = StatusException.class)
+    public void testLoginFailure() {
+        String username = "fred";
+        String key = "API-KEY";
+        Login login = new Login("API-TOKEN");
+        
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
+        map.add("username", username);
+        map.add("key", key);
+        
+        // build the request
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, OpenCart.createHeaders());
+        
+        Mockito.when(restTemplate.postForEntity(openCart.getApi() + "login", request, Login.class))
+        	.thenReturn(new ResponseEntity<Login>(login, HttpStatus.BAD_REQUEST));
+          
+        openCart.login(username, key);
 	}
 
 	@Test
@@ -86,6 +134,41 @@ public class OpenCartTest {
           
         assertTrue(openCart.currency(currency));
         assertNotNull(openCart.getLastResult());
+	}
+
+	@Test
+	public void testCurrencyError() {
+        Currency currency = Currency.USD;
+        Result result = Result.create(null, "Error");
+        
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
+        map.add("currency", currency.name());
+        
+        // build the request
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, OpenCart.createHeaders());
+        
+        Mockito.when(restTemplate.postForEntity(openCart.getApi() + "currency&api_token={apiToken}", request, Result.class, openCart.login.getApiToken()))
+        	.thenReturn(new ResponseEntity<Result>(result, HttpStatus.OK));
+          
+        assertFalse(openCart.currency(currency));
+        assertNotNull(openCart.getLastResult());
+	}
+
+	@Test(expected = StatusException.class)
+	public void testCurrencyFailure() {
+        Currency currency = Currency.USD;
+        Result result = Result.create(null, "Error");
+        
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
+        map.add("currency", currency.name());
+        
+        // build the request
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, OpenCart.createHeaders());
+        
+        Mockito.when(restTemplate.postForEntity(openCart.getApi() + "currency&api_token={apiToken}", request, Result.class, openCart.login.getApiToken()))
+        	.thenReturn(new ResponseEntity<Result>(result, HttpStatus.BAD_REQUEST));
+        
+        openCart.currency(currency);
 	}
 
 	@Test
@@ -200,10 +283,9 @@ public class OpenCartTest {
 		ShippingMethodsWrapper expected = new ShippingMethodsWrapper();
 		expected.setShippingMethods(shippingMethods);
         
-        MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
-        
         // build the request
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, OpenCart.createHeaders());
+        HttpEntity<MultiValueMap<String, String>> request = 
+        		new HttpEntity<MultiValueMap<String, String>>((MultiValueMap<String, String>) new LinkedMultiValueMap<String, String>(), OpenCart.createHeaders());
         
         Mockito.when(restTemplate.postForEntity(openCart.getApi() + "shipping/methods&api_token={apiToken}", request, ShippingMethodsWrapper.class, openCart.login.getApiToken()))
         	.thenReturn(new ResponseEntity<ShippingMethodsWrapper>(expected, HttpStatus.OK));
@@ -253,10 +335,9 @@ public class OpenCartTest {
         Reward reward = new Reward(100, null);
         reward.setSuccess("success");
         
-        MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
-        
         // build the request
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, OpenCart.createHeaders());
+        HttpEntity<MultiValueMap<String, String>> request = 
+        		new HttpEntity<MultiValueMap<String, String>>((MultiValueMap<String, String>) new LinkedMultiValueMap<String, String>(), OpenCart.createHeaders());
         
         Mockito.when(restTemplate.postForEntity(openCart.getApi() + "reward/maximum&api_token={apiToken}", request, Reward.class, openCart.login.getApiToken()))
         	.thenReturn(new ResponseEntity<Reward>(reward, HttpStatus.OK));
@@ -270,10 +351,8 @@ public class OpenCartTest {
         Reward reward = new Reward(0, "50");
         reward.setSuccess("success");
         
-        MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
-        
         // build the request
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, OpenCart.createHeaders());
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>((MultiValueMap<String, String>) new LinkedMultiValueMap<String, String>(), OpenCart.createHeaders());
         
         Mockito.when(restTemplate.postForEntity(openCart.getApi() + "reward/available&api_token={apiToken}", request, Reward.class, openCart.login.getApiToken()))
         	.thenReturn(new ResponseEntity<Reward>(reward, HttpStatus.OK));
@@ -315,10 +394,9 @@ public class OpenCartTest {
 		PaymentMethodsWrapper expected = new PaymentMethodsWrapper();
 		expected.setPaymentMethods(paymentMethods );
         
-        MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
-        
         // build the request
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, OpenCart.createHeaders());
+        HttpEntity<MultiValueMap<String, String>> request = 
+        		new HttpEntity<MultiValueMap<String, String>>((MultiValueMap<String, String>) new LinkedMultiValueMap<String, String>(), OpenCart.createHeaders());
         
         Mockito.when(restTemplate.postForEntity(openCart.getApi() + "payment/methods&api_token={apiToken}", request, PaymentMethodsWrapper.class, openCart.login.getApiToken()))
         	.thenReturn(new ResponseEntity<PaymentMethodsWrapper>(expected, HttpStatus.OK));

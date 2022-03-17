@@ -10,7 +10,13 @@ public class Total {
         super();
     }
 
-    public String getTitle() {
+    public Total(String title, String text) {
+		super();
+		this.title = title;
+		this.text = text;
+	}
+
+	public String getTitle() {
         return title;
     }
 

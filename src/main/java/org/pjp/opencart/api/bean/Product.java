@@ -34,7 +34,22 @@ public class Product {
         super();
     }
 
-    public String getCartId() {
+    public Product(String cartId, String productId, String name, String model, Option[] option, int quantity, boolean stock, int shipping, String price, String total, int reward) {
+		super();
+		this.cartId = cartId;
+		this.productId = productId;
+		this.name = name;
+		this.model = model;
+		this.option = option;
+		this.quantity = quantity;
+		this.stock = stock;
+		this.shipping = shipping;
+		this.price = price;
+		this.total = total;
+		this.reward = reward;
+	}
+
+	public String getCartId() {
         return cartId;
     }
 
