@@ -7,9 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.pjp.opencart.api.bean.Address;
+import org.pjp.opencart.api.bean.Customer;
 import org.pjp.opencart.api.bean.Login;
 import org.pjp.opencart.api.bean.Result;
 import org.pjp.opencart.api.bean.Reward;
+import org.pjp.opencart.api.bean.Voucher;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -90,7 +93,22 @@ public class OpenCartTest {
 
 	@Test
 	public void testCustomer() {
-		fail("Not yet implemented");
+        Customer customer = new Customer("Fred", "Bloggs", "fred.bloggs@gmail.com", "999");
+        Result result = Result.create("Success", null);
+        
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
+        map.add("firstname", customer.getFirstname());
+        map.add("lastname", customer.getLastname());
+        map.add("email", customer.getEmail());
+        map.add("telephone", customer.getTelephone());
+        
+        // build the request
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, OpenCart.createHeaders());
+        
+        Mockito.when(restTemplate.postForEntity(openCart.getApi() + "customer&api_token={apiToken}", request, Result.class, openCart.login.getApiToken()))
+        	.thenReturn(new ResponseEntity<Result>(result, HttpStatus.OK));
+          
+        assertTrue(openCart.customer(customer));
 	}
 
 	@Test
@@ -112,12 +130,46 @@ public class OpenCartTest {
 
 	@Test
 	public void testAddVoucher() {
-		fail("Not yet implemented");
+		Voucher voucher = new Voucher("Fred Bloggs", "fred.bloggs@gmail.com", "Ronnie Scott", "ronnie.scott@hotmail.com", 100, "VOU-7177");
+        Result result = Result.create("Success", null);
+        
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
+        map.add("from_name", voucher.getFromName());
+        map.add("from_email", voucher.getFromEmail());
+        map.add("to_name", voucher.getToName());
+        map.add("to_email", voucher.getToEmail());
+        map.add("amount", Float.toString(voucher.getAmount()));
+        map.add("code", voucher.getCode());
+        
+        // build the request
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, OpenCart.createHeaders());
+        
+        Mockito.when(restTemplate.postForEntity(openCart.getApi() + "voucher/add&api_token={apiToken}", request, Result.class, openCart.login.getApiToken()))
+        	.thenReturn(new ResponseEntity<Result>(result, HttpStatus.OK));
+          
+        assertTrue(openCart.addVoucher(voucher));
 	}
 
 	@Test
 	public void testShippingAddress() {
-		fail("Not yet implemented");
+		Address address = new Address("Fred", "Bloggs", "123 The Street", "London", "UK", "NW6");
+        Result result = Result.create("Success", null);
+        
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
+        map.add("firstname", address.getFirstname());
+        map.add("lastname", address.getLastname());
+        map.add("address_1", address.getAddress1());
+        map.add("city", address.getCity());
+        map.add("country_id", address.getCountryId());
+        map.add("zone_id", address.getZoneId());
+        
+        // build the request
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, OpenCart.createHeaders());
+        
+        Mockito.when(restTemplate.postForEntity(openCart.getApi() + "shipping/address&api_token={apiToken}", request, Result.class, openCart.login.getApiToken()))
+        	.thenReturn(new ResponseEntity<Result>(result, HttpStatus.OK));
+          
+        assertTrue(openCart.shippingAddress(address));
 	}
 
 	@Test
@@ -193,7 +245,24 @@ public class OpenCartTest {
 
 	@Test
 	public void testPaymentAddress() {
-		fail("Not yet implemented");
+		Address address = new Address("Fred", "Bloggs", "123 The Street", "London", "UK", "NW6");
+        Result result = Result.create("Success", null);
+        
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
+        map.add("firstname", address.getFirstname());
+        map.add("lastname", address.getLastname());
+        map.add("address_1", address.getAddress1());
+        map.add("city", address.getCity());
+        map.add("country_id", address.getCountryId());
+        map.add("zone_id", address.getZoneId());
+        
+        // build the request
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, OpenCart.createHeaders());
+        
+        Mockito.when(restTemplate.postForEntity(openCart.getApi() + "payment/address&api_token={apiToken}", request, Result.class, openCart.login.getApiToken()))
+        	.thenReturn(new ResponseEntity<Result>(result, HttpStatus.OK));
+          
+        assertTrue(openCart.paymentAddress(address));
 	}
 
 	@Test
