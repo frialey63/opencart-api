@@ -1,7 +1,6 @@
 package org.pjp.opencart.api;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Before;
@@ -10,9 +9,17 @@ import org.mockito.Mockito;
 import org.pjp.opencart.api.bean.Address;
 import org.pjp.opencart.api.bean.Customer;
 import org.pjp.opencart.api.bean.Login;
+import org.pjp.opencart.api.bean.PaymentMethodsWrapper;
+import org.pjp.opencart.api.bean.PaymentMethodsWrapper.PaymentMethods;
 import org.pjp.opencart.api.bean.Result;
 import org.pjp.opencart.api.bean.Reward;
+import org.pjp.opencart.api.bean.ShippingMethodsWrapper;
+import org.pjp.opencart.api.bean.ShippingMethodsWrapper.ShippingMethods;
 import org.pjp.opencart.api.bean.Voucher;
+import org.pjp.opencart.api.bean.payment.COD;
+import org.pjp.opencart.api.bean.payment.FreeCheckout;
+import org.pjp.opencart.api.bean.payment.PPStandard;
+import org.pjp.opencart.api.bean.shipping.Flat;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -174,7 +181,21 @@ public class OpenCartTest {
 
 	@Test
 	public void testShippingMethods() {
-		fail("Not yet implemented");
+		ShippingMethods shippingMethods = new ShippingMethods();
+		shippingMethods.setFlat(new Flat());
+
+		ShippingMethodsWrapper expected = new ShippingMethodsWrapper();
+		expected.setShippingMethods(shippingMethods);
+        
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
+        
+        // build the request
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, OpenCart.createHeaders());
+        
+        Mockito.when(restTemplate.postForEntity(openCart.getApi() + "shipping/methods&api_token={apiToken}", request, ShippingMethodsWrapper.class, openCart.login.getApiToken()))
+        	.thenReturn(new ResponseEntity<ShippingMethodsWrapper>(expected, HttpStatus.OK));
+          
+        assertEquals(expected, openCart.shippingMethods());
 	}
 
 	@Test
@@ -267,7 +288,23 @@ public class OpenCartTest {
 
 	@Test
 	public void testPaymentMethods() {
-		fail("Not yet implemented");
+		PaymentMethods paymentMethods = new PaymentMethods();
+		paymentMethods.setCod(new COD());
+		paymentMethods.setFreeCheckout(new FreeCheckout());
+		paymentMethods.setPpStandard(new PPStandard());
+
+		PaymentMethodsWrapper expected = new PaymentMethodsWrapper();
+		expected.setPaymentMethods(paymentMethods );
+        
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
+        
+        // build the request
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, OpenCart.createHeaders());
+        
+        Mockito.when(restTemplate.postForEntity(openCart.getApi() + "payment/methods&api_token={apiToken}", request, PaymentMethodsWrapper.class, openCart.login.getApiToken()))
+        	.thenReturn(new ResponseEntity<PaymentMethodsWrapper>(expected, HttpStatus.OK));
+          
+        assertEquals(expected, openCart.paymentMethods());
 	}
 
 	@Test

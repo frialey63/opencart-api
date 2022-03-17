@@ -39,7 +39,7 @@ public class ShippingMethodsWrapper extends Result {
         return shippingMethods;
     }
 
-    public void setMethods(ShippingMethods shippingMethods) {
+    public void setShippingMethods(ShippingMethods shippingMethods) {
         this.shippingMethods = shippingMethods;
     }
 
