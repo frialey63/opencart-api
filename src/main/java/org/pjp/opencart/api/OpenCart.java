@@ -43,7 +43,7 @@ public class OpenCart {
             MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
             map.add("product_id", Integer.toString(productId));
             map.add("quantity", Integer.toString(quantity));
-            
+
             for (Entry<Integer, Integer> option : options.entrySet()) {
                 map.add(String.format("option[%d]", option.getKey()), option.getValue().toString());
             }
@@ -69,7 +69,7 @@ public class OpenCart {
         }
 
         public Cart add(int productId, int quantity) throws CartException {
-        	return add(productId, quantity, Maps.newHashMap());
+            return add(productId, quantity, Maps.newHashMap());
         }
 
         public Cart edit(int cartId, int quantity) throws CartException {
@@ -141,10 +141,10 @@ public class OpenCart {
         private int orderId;
 
         public int getOrderId() {
-			return orderId;
-		}
+            return orderId;
+        }
 
-		public Order add() throws OrderException {
+        public Order add() throws OrderException {
             ResponseEntity<NewOrder> response = performPostRequest("order/add", new LinkedMultiValueMap<String, String>(), NewOrder.class);
 
             // check response
@@ -262,11 +262,11 @@ public class OpenCart {
     }
 
     @VisibleForTesting
-	static HttpHeaders createHeaders() {
-		HttpHeaders headers = new HttpHeaders();
+    static HttpHeaders createHeaders() {
+        HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-		return headers;
-	}
+        return headers;
+    }
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OpenCart.class);
 
@@ -291,13 +291,13 @@ public class OpenCart {
     }
 
     public void setRestTemplate(RestTemplate restTemplate) {
-		this.restTemplate = restTemplate;
-	}
+        this.restTemplate = restTemplate;
+    }
 
-	public boolean login(String username, String key) {
-		username = checkNotNull(username, "username cannot be null");
-		key = checkNotNull(key, "key cannot be null");
-		
+    public boolean login(String username, String key) {
+        username = checkNotNull(username, "username cannot be null");
+        key = checkNotNull(key, "key cannot be null");
+
         String url = getApi() + "login";
 
         // request body form parameters
@@ -323,16 +323,16 @@ public class OpenCart {
                 throw new StatusException("login failed with status code " + response.getStatusCode());
             }
         } catch (RestClientException e) {
-            LOGGER.debug("login failed");
+            LOGGER.error("login failed due to RestClientException", e);
         }
 
         return false;
     }
 
     public boolean currency(Currency currency) {
-    	currency = checkNotNull(currency, "currency cannot be null");
+        currency = checkNotNull(currency, "currency cannot be null");
 
-		MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
         map.add("currency", currency.name());
 
         ResponseEntity<Result> response = performPostRequest("currency", map, Result.class);
@@ -364,7 +364,7 @@ public class OpenCart {
     }
 
     public boolean customer(Customer customer) {
-    	customer = checkNotNull(customer, "customer cannot be null");
+        customer = checkNotNull(customer, "customer cannot be null");
 
         MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
         map.add("firstname", customer.getFirstname());
@@ -385,7 +385,7 @@ public class OpenCart {
     }
 
     public boolean voucher(String voucher) {
-    	voucher = checkNotNull(voucher, "voucher cannot be null");
+        voucher = checkNotNull(voucher, "voucher cannot be null");
 
         MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
         map.add("voucher", voucher);
@@ -403,7 +403,7 @@ public class OpenCart {
     }
 
     public boolean addVoucher(Voucher voucher) {
-    	voucher = checkNotNull(voucher, "voucher cannot be null");
+        voucher = checkNotNull(voucher, "voucher cannot be null");
 
         MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
         map.add("from_name", voucher.getFromName());
@@ -426,7 +426,7 @@ public class OpenCart {
     }
 
     public boolean shippingAddress(Address address) {
-    	address = checkNotNull(address, "address cannot be null");
+        address = checkNotNull(address, "address cannot be null");
 
         MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
         map.add("firstname", address.getFirstname());
@@ -468,7 +468,7 @@ public class OpenCart {
     }
 
     public boolean shippingMethod(String code) {
-    	code = checkNotNull(code, "code cannot be null");
+        code = checkNotNull(code, "code cannot be null");
 
         MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
         map.add("shipping_method", code);
@@ -528,7 +528,7 @@ public class OpenCart {
     }
 
     public boolean paymentAddress(Address address) {
-    	address = checkNotNull(address, "address cannot be null");
+        address = checkNotNull(address, "address cannot be null");
 
         MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
         map.add("firstname", address.getFirstname());
@@ -570,7 +570,7 @@ public class OpenCart {
     }
 
     public boolean paymentMethod(String code) {
-    	code = checkNotNull(code, "code cannot be null");
+        code = checkNotNull(code, "code cannot be null");
 
         MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
         map.add("payment_method", code);
