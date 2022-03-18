@@ -4,6 +4,11 @@ import java.util.Arrays;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Bean to represent a product.
+ * @author developer
+ *
+ */
 public class Product {
 
     @JsonProperty("cart_id")
@@ -30,10 +35,26 @@ public class Product {
 
     private int reward;
 
+    /**
+     * Default constructor required by Jackson.
+     */
     public Product() {
         super();
     }
 
+    /**
+     * @param cartId Cart ID
+     * @param productId ID of the product
+     * @param name Name
+     * @param model Model
+     * @param option Options
+     * @param quantity Quantity
+     * @param stock In stock
+     * @param shipping Shipping?
+     * @param price Price
+     * @param total Total
+     * @param reward Reward points
+     */
     // CHECKSTYLE:OFF number of parameters
     public Product(String cartId, String productId, String name, String model, Option[] option, int quantity, boolean stock, int shipping, String price, String total, int reward) {
     // CHECKSTYLE:ON

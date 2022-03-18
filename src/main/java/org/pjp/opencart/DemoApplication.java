@@ -18,6 +18,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * A driver program for the OpenCart API which generates an order in the wizard style interaction of the web site.
+ * @author developer
+ *
+ */
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
 
@@ -37,10 +42,16 @@ public class DemoApplication implements CommandLineRunner {
     @Value("${opencart.api.key}")
     private String key;
 
+    /**
+     * @param args program arguments
+     */
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
     }
 
+    /**
+     * @return The RestTemplate
+     */
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();

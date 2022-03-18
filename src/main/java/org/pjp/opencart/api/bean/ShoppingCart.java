@@ -2,6 +2,11 @@ package org.pjp.opencart.api.bean;
 
 import java.util.Arrays;
 
+/**
+ * Bean to represent the shopping cart.
+ * @author developer
+ *
+ */
 public class ShoppingCart extends Result {
 
     private Product[] products;
@@ -10,6 +15,9 @@ public class ShoppingCart extends Result {
 
     private Total[] totals;
 
+    /**
+     * Default constructor required by Jackson.
+     */
     public ShoppingCart() {
         super();
         success = "Success";

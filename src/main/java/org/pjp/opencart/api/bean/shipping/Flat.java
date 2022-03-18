@@ -2,6 +2,11 @@ package org.pjp.opencart.api.bean.shipping;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Bean to represent the Flat shipment.
+ * @author developer
+ *
+ */
 public class Flat {
 
     private String title;
@@ -13,6 +18,9 @@ public class Flat {
 
     private boolean error;
 
+    /**
+     * Default constructor required by Jackson.
+     */
     public Flat() {
         super();
     }

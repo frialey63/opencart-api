@@ -1,5 +1,10 @@
 package org.pjp.opencart.api;
 
+/**
+ * Enum to represent a currency.
+ * @author developer
+ *
+ */
 public enum Currency {
 
     /**

@@ -2,6 +2,11 @@ package org.pjp.opencart.api.bean;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Bean to represent a product option.
+ * @author developer
+ *
+ */
 public class Option {
 
     @JsonProperty("product_option_id")
@@ -16,6 +21,9 @@ public class Option {
 
     private String type;
 
+    /**
+     * Default constructor required by Jackson.
+     */
     public Option() {
         super();
     }

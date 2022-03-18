@@ -4,8 +4,16 @@ import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Singleton object for the product database.
+ * @author developer
+ *
+ */
 public final class ProductDatabase {
 
+    /**
+     * @return The ProductDatabase
+     */
     public static ProductDatabase getInstance() {
         return INSTANCE;
     }
@@ -28,6 +36,10 @@ public final class ProductDatabase {
 
     }
 
+    /**
+     * @param name Name of the product
+     * @return The Product
+     */
     public Product findByName(String name) {
         return map.get(name);
     }

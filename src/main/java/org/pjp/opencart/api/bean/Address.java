@@ -1,5 +1,10 @@
 package org.pjp.opencart.api.bean;
 
+/**
+ * Bean to represent an address.
+ * @author developer
+ *
+ */
 public class Address {
 
     private final String firstname;
@@ -14,6 +19,14 @@ public class Address {
 
     private final String zoneId;
 
+    /**
+     * @param firstname First name
+     * @param lastname Last name
+     * @param address1 Address 1
+     * @param city City
+     * @param countryId Country ID
+     * @param zoneId Zone ID
+     */
     public Address(String firstname, String lastname, String address1, String city, String countryId, String zoneId) {
         super();
         this.firstname = firstname;

@@ -6,6 +6,11 @@ import org.pjp.opencart.api.bean.payment.PPStandard;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Bean to represent payment methods.
+ * @author developer
+ *
+ */
 public class PaymentMethodsWrapper extends Result {
 
     public static class PaymentMethods {
@@ -18,6 +23,9 @@ public class PaymentMethodsWrapper extends Result {
         @JsonProperty("free_checkout")
         private FreeCheckout freeCheckout;
 
+        /**
+         * Default constructor required by Jackson.
+         */
         public PaymentMethods() {
             super();
         }
@@ -56,7 +64,10 @@ public class PaymentMethodsWrapper extends Result {
     @JsonProperty("payment_methods")
     private PaymentMethods paymentMethods;
 
-    public PaymentMethodsWrapper() {
+    /**
+     * Default constructor required by Jackson.
+     */
+   public PaymentMethodsWrapper() {
         super();
         success = "Success";
     }

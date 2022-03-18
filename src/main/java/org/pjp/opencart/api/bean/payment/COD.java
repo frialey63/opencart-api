@@ -2,6 +2,11 @@ package org.pjp.opencart.api.bean.payment;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Bean to represent the COD payment.
+ * @author developer
+ *
+ */
 public class COD {
 
     private String code;
@@ -13,7 +18,10 @@ public class COD {
     @JsonProperty("sort_order")
     private String sortOrder;
 
-    public COD() {
+    /**
+     * Default constructor required by Jackson.
+     */
+   public COD() {
         super();
     }
 

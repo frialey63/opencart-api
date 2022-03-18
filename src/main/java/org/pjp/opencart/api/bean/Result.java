@@ -1,7 +1,17 @@
 package org.pjp.opencart.api.bean;
 
+/**
+ * Bean to represent a result.
+ * @author developer
+ *
+ */
 public class Result {
 
+    /**
+     * @param success Success message
+     * @param error Error message
+     * @return The Result
+     */
     public static Result create(String success, Object error) {
         Result result = new Result();
         result.setSuccess(success);
@@ -17,6 +27,9 @@ public class Result {
 
     // CHECKSTYLE:ON
 
+    /**
+     * Default constructor required by Jackson.
+     */
     public Result() {
         super();
     }

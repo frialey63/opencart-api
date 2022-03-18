@@ -1,15 +1,27 @@
 package org.pjp.opencart.api.bean;
 
+/**
+ * Bean to represent a reward.
+ * @author developer
+ *
+ */
 public class Reward extends Result {
 
     private int maximum;
 
     private String points;
 
+    /**
+     * Default constructor required by Jackson.
+     */
     public Reward() {
         super();
     }
 
+    /**
+     * @param maximum Maximum
+     * @param points Points
+     */
     public Reward(int maximum, String points) {
         super();
         success = "Success";

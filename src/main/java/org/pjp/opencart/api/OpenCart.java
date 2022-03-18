@@ -33,8 +33,18 @@ import org.springframework.web.client.RestTemplate;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Maps;
 
+/**
+ * Class which defines the operations on the OpenCart (free) API.
+ * @author developer
+ *
+ */
 public class OpenCart {
 
+    /**
+     * Embedded class defining operations on the Shopping Cart.
+     * @author developer
+     *
+     */
     public class Cart {
 
         public Cart add(int productId, int quantity, Map<Integer, Integer> options) throws CartException {
@@ -136,6 +146,11 @@ public class OpenCart {
         }
     }
 
+    /**
+     * Embedded class defining operations on the Order.
+     * @author developer
+     *
+     */
     public class Order {
 
         private int orderId;

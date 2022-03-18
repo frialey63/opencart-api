@@ -3,7 +3,12 @@ package org.pjp.opencart.api.bean;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 
-public final class Customer {
+/**
+ * Bean to represent a customer.
+ * @author developer
+ *
+ */
+public class Customer {
 
     private static final int NAME_LENGTH = 32;
 
@@ -19,6 +24,12 @@ public final class Customer {
 
     private final String telephone;
 
+    /**
+     * @param firstname First name
+     * @param lastname last name
+     * @param email Email address
+     * @param telephone Telephone number
+     */
     public Customer(String firstname, String lastname, String email, String telephone) {
         super();
         this.firstname = firstname;

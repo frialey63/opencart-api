@@ -2,6 +2,11 @@ package org.pjp.opencart.api.bean.shipping;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Bean to represent the shipment quote.
+ * @author developer
+ *
+ */
 public class Quote {
 
     public class Flat {
@@ -17,6 +22,9 @@ public class Quote {
 
         private String text;
 
+        /**
+         * Default constructor required by Jackson.
+         */
         public Flat() {
             super();
         }
@@ -71,6 +79,9 @@ public class Quote {
 
     private Quote.Flat flat;
 
+    /**
+     * Default constructor required by Jackson.
+     */
     public Quote() {
         super();
     }

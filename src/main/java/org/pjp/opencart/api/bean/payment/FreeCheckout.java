@@ -2,6 +2,11 @@ package org.pjp.opencart.api.bean.payment;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Bean to represent the free payment.
+ * @author developer
+ *
+ */
 public class FreeCheckout {
 
     private String code;
@@ -13,6 +18,9 @@ public class FreeCheckout {
     @JsonProperty("sort_order")
     private String sortOrder;
 
+    /**
+     * Default constructor required by Jackson.
+     */
     public FreeCheckout() {
         super();
     }

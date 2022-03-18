@@ -4,6 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 
+/**
+ * Bean to represent a voucher.
+ * @author developer
+ *
+ */
 public class Voucher {
 
     private static final int NAME_LENGTH = 64;
@@ -35,10 +40,21 @@ public class Voucher {
 
     private float amount;
 
+    /**
+     * Default constructor required by Jackson.
+     */
     public Voucher() {
         super();
     }
 
+    /**
+     * @param fromName Name of sender
+     * @param fromEmail Email of sender
+     * @param toName Name of recipient
+     * @param toEmail Email of recipient
+     * @param amount Amount
+     * @param code Voucher code
+     */
     public Voucher(String fromName, String fromEmail, String toName, String toEmail, float amount, String code) {
         super();
         this.fromName = fromName;

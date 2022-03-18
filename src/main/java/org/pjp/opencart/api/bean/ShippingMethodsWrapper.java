@@ -4,12 +4,20 @@ import org.pjp.opencart.api.bean.shipping.Flat;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Bean to represent shipping methods.
+ * @author developer
+ *
+ */
 public class ShippingMethodsWrapper extends Result {
 
     public static class ShippingMethods {
 
         private Flat flat;
 
+        /**
+         * Default constructor required by Jackson.
+         */
         public ShippingMethods() {
             super();
         }
@@ -31,6 +39,9 @@ public class ShippingMethodsWrapper extends Result {
     @JsonProperty("shipping_methods")
     private ShippingMethods shippingMethods;
 
+    /**
+     * Default constructor required by Jackson.
+     */
     public ShippingMethodsWrapper() {
         super();
         success = "Success";
