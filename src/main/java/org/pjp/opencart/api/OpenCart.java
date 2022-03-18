@@ -140,7 +140,11 @@ public class OpenCart {
 
         private int orderId;
 
-        public Order add() throws OrderException {
+        public int getOrderId() {
+			return orderId;
+		}
+
+		public Order add() throws OrderException {
             ResponseEntity<NewOrder> response = performPostRequest("order/add", new LinkedMultiValueMap<String, String>(), NewOrder.class);
 
             // check response

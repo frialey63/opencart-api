@@ -11,7 +11,13 @@ public class NewOrder extends Result {
         super();
     }
 
-    public int getOrderId() {
+    public NewOrder(int orderId) {
+		super();
+		success = "Success";
+		this.orderId = orderId;
+	}
+
+	public int getOrderId() {
         return orderId;
     }
 

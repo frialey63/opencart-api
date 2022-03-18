@@ -9,9 +9,9 @@ public class Result {
 		return result;
 	}
 
-    private String success;
+    String success;
 
-    private Object error;
+    Object error;
 
     public boolean ok() {
         return (success != null) || (error == null);

@@ -12,6 +12,7 @@ public class ShoppingCart extends Result {
 
     public ShoppingCart() {
         super();
+		success = "Success";
     }
 
     public Product[] getProducts() {

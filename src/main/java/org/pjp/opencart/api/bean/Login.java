@@ -9,6 +9,7 @@ public final class Login extends Result {
 
     public Login(String apiToken) {
 		super();
+		success = "Success";
 		this.apiToken = apiToken;
 	}
 
