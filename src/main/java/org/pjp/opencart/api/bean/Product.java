@@ -34,22 +34,24 @@ public class Product {
         super();
     }
 
+    // CHECKSTYLE:OFF number of parameters
     public Product(String cartId, String productId, String name, String model, Option[] option, int quantity, boolean stock, int shipping, String price, String total, int reward) {
-		super();
-		this.cartId = cartId;
-		this.productId = productId;
-		this.name = name;
-		this.model = model;
-		this.option = option;
-		this.quantity = quantity;
-		this.stock = stock;
-		this.shipping = shipping;
-		this.price = price;
-		this.total = total;
-		this.reward = reward;
-	}
+    // CHECKSTYLE:ON
+        super();
+        this.cartId = cartId;
+        this.productId = productId;
+        this.name = name;
+        this.model = model;
+        this.option = option;
+        this.quantity = quantity;
+        this.stock = stock;
+        this.shipping = shipping;
+        this.price = price;
+        this.total = total;
+        this.reward = reward;
+    }
 
-	public String getCartId() {
+    public String getCartId() {
         return cartId;
     }
 

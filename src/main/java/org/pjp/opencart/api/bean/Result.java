@@ -9,9 +9,13 @@ public class Result {
         return result;
     }
 
+    // CHECKSTYLE:OFF encapsulation
+
     String success;
 
     Object error;
+
+    // CHECKSTYLE:ON
 
     public Result() {
         super();

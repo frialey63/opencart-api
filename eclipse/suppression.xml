@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE suppressions PUBLIC "-//Puppy Crawl//DTD Suppressions 1.1//EN" "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
+
+<suppressions>
+
+    <!-- Suppressions for unit testing code -->
+
+    <suppress checks="MagicNumber" files="[/\\]test[/\\]java[/\\]org[/\\]pjp[/\\]opencart[/\\]" />
+    <suppress checks="JavadocPackage" files="[/\\]test[/\\]java[/\\]org[/\\]pjp[/\\]opencart[/\\]" />
+    <suppress checks="JavadocMethod" files="[/\\]test[/\\]java[/\\]org[/\\]pjp[/\\]opencart[/\\]" />
+    <suppress checks="JavadocVariable" files="[/\\]test[/\\]java[/\\]org[/\\]pjp[/\\]opencart[/\\]" />
+    <suppress checks="JavadocType" files="[/\\]test[/\\]java[/\\]org[/\\]pjp[/\\]opencart[/\\]" />
+    <suppress checks="IllegalThrows" files="[/\\]test[/\\]java[/\\]org[/\\]pjp[/\\]opencart[/\\]" />
+    <suppress checks="ImportControl" files="[/\\]test[/\\]java[/\\]org[/\\]pjp[/\\]opencart[/\\]" />
+
+</suppressions>

@@ -12,12 +12,12 @@ public class NewOrder extends Result {
     }
 
     public NewOrder(int orderId) {
-		super();
-		success = "Success";
-		this.orderId = orderId;
-	}
+        super();
+        success = "Success";
+        this.orderId = orderId;
+    }
 
-	public int getOrderId() {
+    public int getOrderId() {
         return orderId;
     }
 

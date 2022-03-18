@@ -11,13 +11,13 @@ public class Reward extends Result {
     }
 
     public Reward(int maximum, String points) {
-		super();
-		success = "Success";
-		this.maximum = maximum;
-		this.points = points;
-	}
+        super();
+        success = "Success";
+        this.maximum = maximum;
+        this.points = points;
+    }
 
-	public int getMaximum() {
+    public int getMaximum() {
         return maximum;
     }
 

@@ -11,12 +11,12 @@ public class Total {
     }
 
     public Total(String title, String text) {
-		super();
-		this.title = title;
-		this.text = text;
-	}
+        super();
+        this.title = title;
+        this.text = text;
+    }
 
-	public String getTitle() {
+    public String getTitle() {
         return title;
     }
 

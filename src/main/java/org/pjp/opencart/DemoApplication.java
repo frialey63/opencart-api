@@ -21,6 +21,12 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
 
+    private static final int AMOUNT = 100;
+
+    private static final int COUPON = 2222;
+
+    private static final int REWARD = 10;
+
     private static final String LOCALHOST = "localhost";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DemoApplication.class);
@@ -53,12 +59,12 @@ public class DemoApplication implements CommandLineRunner {
 
             System.out.println(openCart.currency(Currency.USD) ? "set currency to USD" : "unable to set currency");
             System.out.println(openCart.customer(new Customer("Fred", "Bloggs", "fred.bloggs@gmail.com", "999")) ? "the customer Fred Bloggs has been set" : "unable to set the customer");
-            System.out.println(openCart.coupon(2222) ? "applied the coupon 2222" : "unable to apply coupon");
+            System.out.println(openCart.coupon(COUPON) ? "applied the coupon 2222" : "unable to apply coupon");
 
             System.out.println("----");
 
             System.out.println(openCart.voucher("VOU-7271") ? "applied existing voucher VOU-7271" : "unable to apply existing voucher");
-            System.out.println(openCart.addVoucher(new Voucher("Fred Bloggs", "fred.bloggs@gmail.com", "Ronnie Scott", "ronnie.scott@hotmail.com", 100, "VOU-7177")) ? "added the new voucher VOU-7177" : "unable to add new voucher");
+            System.out.println(openCart.addVoucher(new Voucher("Fred Bloggs", "fred.bloggs@gmail.com", "Ronnie Scott", "ronnie.scott@hotmail.com", AMOUNT, "VOU-7177")) ? "added the new voucher VOU-7177" : "unable to add new voucher");
 
             System.out.println("----");
 
@@ -78,7 +84,7 @@ public class DemoApplication implements CommandLineRunner {
 
                 System.out.println("reward maximum = " + openCart.rewardMaximum());
                 System.out.println("reward available = " + openCart.rewardAvailable());
-                System.out.println(openCart.reward(10) ? "a reward of 10 has been utilised" : "unable to utilise a reward");
+                System.out.println(openCart.reward(REWARD) ? "a reward of 10 has been utilised" : "unable to utilise a reward");
 
                 System.out.println("----");
 

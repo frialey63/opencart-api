@@ -6,6 +6,10 @@ import com.google.common.base.Strings;
 
 public class Voucher {
 
+    private static final int NAME_LENGTH = 64;
+
+    private static final int MAXIMUM = 1_000;
+
     private String code;
 
     private String description;
@@ -44,11 +48,11 @@ public class Voucher {
         this.amount = amount;
         this.code = code;
 
-        Preconditions.checkArgument(!Strings.isNullOrEmpty(fromName) && (fromName.length() < 65), "Your Name must be between 1 and 64 characters!");
+        Preconditions.checkArgument(!Strings.isNullOrEmpty(fromName) && (fromName.length() <= NAME_LENGTH), "Your Name must be between 1 and 64 characters!");
         Preconditions.checkArgument(!Strings.isNullOrEmpty(fromEmail) &&  fromEmail.matches("^(.+)@(\\S+)$"), "E-Mail Address does not appear to be valid!");
-        Preconditions.checkArgument(!Strings.isNullOrEmpty(toName) && (toName.length() < 65), "Recipient's Name must be between 1 and 64 characters!");
+        Preconditions.checkArgument(!Strings.isNullOrEmpty(toName) && (toName.length() <= NAME_LENGTH), "Recipient's Name must be between 1 and 64 characters!");
         Preconditions.checkArgument(!Strings.isNullOrEmpty(toEmail) &&  toEmail.matches("^(.+)@(\\S+)$"), "E-Mail Address does not appear to be valid!");
-        Preconditions.checkArgument(amount > 0 && amount <= 1_000, "Amount must be between $1.00 and $1,000.00!");
+        Preconditions.checkArgument(amount > 0 && amount <= MAXIMUM, "Amount must be between $1.00 and $1,000.00!");
     }
 
     public String getCode() {

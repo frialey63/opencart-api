@@ -17,11 +17,15 @@ public class Camera extends Product implements Optionality {
     public Map<Integer, Integer> getOptions() {
         Map<Integer, Integer> options = new HashMap<>();
 
+        // CHECKSTYLE:OFF magic numbers
+
         if (Color.RED.equals(colour)) {
             options.put(226, 15);
         } else if (Color.BLUE.equals(colour)) {
             options.put(226, 16);
         }
+
+        // CHECKSTYLE:ON
 
         return options;
     }

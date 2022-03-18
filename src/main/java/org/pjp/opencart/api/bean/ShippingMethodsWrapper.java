@@ -33,7 +33,7 @@ public class ShippingMethodsWrapper extends Result {
 
     public ShippingMethodsWrapper() {
         super();
-		success = "Success";
+        success = "Success";
     }
 
     public ShippingMethods getShippingMethods() {
