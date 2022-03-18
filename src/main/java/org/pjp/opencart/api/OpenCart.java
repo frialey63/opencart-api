@@ -47,6 +47,14 @@ public class OpenCart {
      */
     public class Cart {
 
+        /**
+         * Add product to the cart.
+         * @param productId ID of the product
+         * @param quantity Quantity
+         * @param options Map of product options
+         * @return Cart
+         * @throws CartException
+         */
         public Cart add(int productId, int quantity, Map<Integer, Integer> options) throws CartException {
             options = checkNotNull(options, "options must not be null");
 
@@ -78,10 +86,24 @@ public class OpenCart {
             }
         }
 
+        /**
+         * Add product to the cart excluding any options.
+         * @param productId ID of the product
+         * @param quantity Quantity
+         * @return Cart
+         * @throws CartException
+         */
         public Cart add(int productId, int quantity) throws CartException {
             return add(productId, quantity, Maps.newHashMap());
         }
 
+        /**
+         * Edit product (quantity) in the cart.
+         * @param cartId ID of the item
+         * @param quantity Quantity revision
+         * @return Cart
+         * @throws CartException
+         */
         public Cart edit(int cartId, int quantity) throws CartException {
             MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
             map.add("key", Integer.toString(cartId));
@@ -107,6 +129,12 @@ public class OpenCart {
             }
         }
 
+        /**
+         * Remove a product from the cart.
+         * @param cartId ID of the item
+         * @return Cart
+         * @throws CartException
+         */
         public Cart remove(int cartId) throws CartException {
             MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
             map.add("key", Integer.toString(cartId));
@@ -131,6 +159,10 @@ public class OpenCart {
             }
         }
 
+        /**
+         * Contents of the cart, i.e  the list of products.
+         * @return ShoppingCart
+         */
         public ShoppingCart products() {
             ResponseEntity<ShoppingCart> response = performPostRequest("cart/products", new LinkedMultiValueMap<String, String>(), ShoppingCart.class);
 
@@ -159,6 +191,11 @@ public class OpenCart {
             return orderId;
         }
 
+        /**
+         * Add order.
+         * @return Order
+         * @throws OrderException
+         */
         public Order add() throws OrderException {
             ResponseEntity<NewOrder> response = performPostRequest("order/add", new LinkedMultiValueMap<String, String>(), NewOrder.class);
 
@@ -181,7 +218,11 @@ public class OpenCart {
             }
         }
 
-        // TODO this API does not appear to be implemented
+        /**
+         * TODO this API does not appear to be implemented
+         * @return Order
+         * @throws OrderException
+         */
         public Order edit() throws OrderException {
             ResponseEntity<Result> response = performPostRequest("order/edit", new LinkedMultiValueMap<String, String>(), Result.class);
 
@@ -203,7 +244,11 @@ public class OpenCart {
            }
         }
 
-        // TODO this API does not appear to be implemented
+        /**
+         * TODO this API does not appear to be implemented
+         * @return Order
+         * @throws OrderException
+         */
         public Order delete() throws OrderException {
             ResponseEntity<Result> response = performPostRequest("order/delete", new LinkedMultiValueMap<String, String>(), Result.class);
 
@@ -225,7 +270,11 @@ public class OpenCart {
             }
         }
 
-        // TODO this API does not appear to be implemented
+        /**
+         * TODO this API does not appear to be implemented
+         * @return Order
+         * @throws OrderException
+         */
         public Order info() throws OrderException {
             ResponseEntity<Result> response = performPostRequest("order/info", new LinkedMultiValueMap<String, String>(), Result.class);
 
@@ -247,7 +296,11 @@ public class OpenCart {
             }
         }
 
-        // TODO this API does not appear to be implemented
+        /**
+         * TODO this API does not appear to be implemented
+         * @return Order
+         * @throws OrderException
+         */
         public Order history() throws OrderException {
             ResponseEntity<Result> response = performPostRequest("order/history", new LinkedMultiValueMap<String, String>(), Result.class);
 
@@ -300,15 +353,26 @@ public class OpenCart {
 
     private RestTemplate restTemplate;
 
+    /**
+     * @param host The host for the OpenCart server, maybe localhost
+     */
     public OpenCart(String host) {
         super();
         this.host = host;
     }
 
+    /**
+     * @param restTemplate The RestTemplate through which all REST calls are mechanised
+     */
     public void setRestTemplate(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
+    /**
+     * @param username The name of the API user
+     * @param key The key for the API user
+     * @return True if logged in
+     */
     public boolean login(String username, String key) {
         username = checkNotNull(username, "username cannot be null");
         key = checkNotNull(key, "key cannot be null");
@@ -344,6 +408,10 @@ public class OpenCart {
         return false;
     }
 
+    /**
+     * @param currency The currency
+     * @return True if set
+     */
     public boolean currency(Currency currency) {
         currency = checkNotNull(currency, "currency cannot be null");
 
@@ -362,6 +430,10 @@ public class OpenCart {
         }
     }
 
+    /**
+     * @param coupon The coupon
+     * @return True if applied
+     */
     public boolean coupon(int coupon) {
         MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
         map.add("coupon", Integer.toString(coupon));
@@ -378,6 +450,10 @@ public class OpenCart {
         }
     }
 
+    /**
+     * @param customer The customer
+     * @return True if set
+     */
     public boolean customer(Customer customer) {
         customer = checkNotNull(customer, "customer cannot be null");
 
@@ -399,6 +475,10 @@ public class OpenCart {
         }
     }
 
+    /**
+     * @param voucher Existing voucher
+     * @return True if applied
+     */
     public boolean voucher(String voucher) {
         voucher = checkNotNull(voucher, "voucher cannot be null");
 
@@ -417,6 +497,10 @@ public class OpenCart {
         }
     }
 
+    /**
+     * @param voucher The new voucher
+     * @return True if added
+     */
     public boolean addVoucher(Voucher voucher) {
         voucher = checkNotNull(voucher, "voucher cannot be null");
 
@@ -440,6 +524,10 @@ public class OpenCart {
         }
     }
 
+    /**
+     * @param address The shipping address
+     * @return True if set
+     */
     public boolean shippingAddress(Address address) {
         address = checkNotNull(address, "address cannot be null");
 
@@ -469,6 +557,9 @@ public class OpenCart {
         return false;
     }
 
+    /**
+     * @return List of available shipping methods
+     */
     public ShippingMethodsWrapper shippingMethods() {
         ResponseEntity<ShippingMethodsWrapper> response = performPostRequest("shipping/methods", new LinkedMultiValueMap<String, String>(), ShippingMethodsWrapper.class);
 
@@ -482,6 +573,10 @@ public class OpenCart {
         }
     }
 
+    /**
+     * @param code The code for the shipping method
+     * @return True if set
+     */
     public boolean shippingMethod(String code) {
         code = checkNotNull(code, "code cannot be null");
 
@@ -500,6 +595,10 @@ public class OpenCart {
         }
     }
 
+    /**
+     * @param points Reward points
+     * @return True if applied
+     */
     public boolean reward(int points) {
         MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
         map.add("reward", Integer.toString(points));
@@ -516,6 +615,9 @@ public class OpenCart {
         }
     }
 
+    /**
+     * @return The maximum reward points which can be applied
+     */
     public int rewardMaximum() {
         ResponseEntity<Reward> response = performPostRequest("reward/maximum", new LinkedMultiValueMap<String, String>(), Reward.class);
 
@@ -529,6 +631,9 @@ public class OpenCart {
         }
     }
 
+    /**
+     * @return The reward points which are available
+     */
     public String rewardAvailable() {
         ResponseEntity<Reward> response = performPostRequest("reward/available", new LinkedMultiValueMap<String, String>(), Reward.class);
 
@@ -542,6 +647,10 @@ public class OpenCart {
         }
     }
 
+    /**
+     * @param address The payment address
+     * @return True if set
+     */
     public boolean paymentAddress(Address address) {
         address = checkNotNull(address, "address cannot be null");
 
@@ -571,6 +680,9 @@ public class OpenCart {
         return false;
     }
 
+    /**
+     * @return List of available payment methods
+     */
     public PaymentMethodsWrapper paymentMethods() {
         ResponseEntity<PaymentMethodsWrapper> response = performPostRequest("payment/methods", new LinkedMultiValueMap<String, String>(), PaymentMethodsWrapper.class);
 
@@ -584,6 +696,10 @@ public class OpenCart {
         }
     }
 
+    /**
+     * @param code The code for the payment method
+     * @return True if set
+     */
     public boolean paymentMethod(String code) {
         code = checkNotNull(code, "code cannot be null");
 
@@ -612,14 +728,23 @@ public class OpenCart {
         return restTemplate.postForEntity(url, request, clazz, login.getApiToken());
     }
 
+    /**
+     * @return The Cart
+     */
     public Cart getCart() {
         return cart;
     }
 
+    /**
+     * @return The Order
+     */
     public Order getOrder() {
         return order;
     }
 
+    /**
+     * @return The LastResult
+     */
     public Result getLastResult() {
         return lastResult;
     }
