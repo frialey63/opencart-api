@@ -26,7 +26,17 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
 
-    private static final int AMOUNT = 100;
+    private static final String PAYMENT_METHOD = "cod";
+
+    private static final String SHIPPING_METHOD = "flat.flat";
+
+    private static final Address ADDRESS = new Address("Fred", "Bloggs", "123 The Street", "London", "UK", "NW6");
+
+    private static final String VOUCHER = "VOU-7271";
+
+    private static final Customer CUSTOMER = new Customer("Fred", "Bloggs", "fred.bloggs@gmail.com", "999");
+
+    private static final Voucher NEW_VOUCHER = new Voucher("Fred Bloggs", "fred.bloggs@gmail.com", "Ronnie Scott", "ronnie.scott@hotmail.com", 100, "VOU-7177");
 
     private static final int COUPON = 2222;
 
@@ -69,13 +79,13 @@ public class DemoApplication implements CommandLineRunner {
             System.out.println("----");
 
             System.out.println(openCart.currency(Currency.USD) ? "set currency to USD" : "unable to set currency");
-            System.out.println(openCart.customer(new Customer("Fred", "Bloggs", "fred.bloggs@gmail.com", "999")) ? "the customer Fred Bloggs has been set" : "unable to set the customer");
-            System.out.println(openCart.coupon(COUPON) ? "applied the coupon 2222" : "unable to apply coupon");
+            System.out.println(openCart.customer(CUSTOMER) ? "the customer has been set" : "unable to set the customer");
+            System.out.println(openCart.coupon(COUPON) ? "applied the coupon " + COUPON : "unable to apply coupon");
 
             System.out.println("----");
 
-            System.out.println(openCart.voucher("VOU-7271") ? "applied existing voucher VOU-7271" : "unable to apply existing voucher");
-            System.out.println(openCart.addVoucher(new Voucher("Fred Bloggs", "fred.bloggs@gmail.com", "Ronnie Scott", "ronnie.scott@hotmail.com", AMOUNT, "VOU-7177")) ? "added the new voucher VOU-7177" : "unable to add new voucher");
+            System.out.println(openCart.voucher(VOUCHER) ? "applied existing voucher " + VOUCHER : "unable to apply existing voucher");
+            System.out.println(openCart.addVoucher(NEW_VOUCHER) ? "added the new voucher " + NEW_VOUCHER.getCode() : "unable to add new voucher");
 
             System.out.println("----");
 
@@ -87,21 +97,21 @@ public class DemoApplication implements CommandLineRunner {
 
                 System.out.println("----");
 
-                System.out.println(openCart.shippingAddress(new Address("Fred", "Bloggs", "123 The Street", "London", "UK", "NW6")) ? "the shipping address for Fred Bloggs has been set" : "unable to set shipping address");
+                System.out.println(openCart.shippingAddress(ADDRESS) ? "the shipping address has been set" : "unable to set shipping address");
                 System.out.println("shipping methods = " + openCart.shippingMethods());
-                System.out.println(openCart.shippingMethod("flat.flat") ? "set shipping method to flat.flat" : "unable to set shipping method");
+                System.out.println(openCart.shippingMethod(SHIPPING_METHOD) ? "set shipping method to " + SHIPPING_METHOD : "unable to set shipping method");
 
                 System.out.println("----");
 
                 System.out.println("reward maximum = " + openCart.rewardMaximum());
                 System.out.println("reward available = " + openCart.rewardAvailable());
-                System.out.println(openCart.reward(REWARD) ? "a reward of 10 has been utilised" : "unable to utilise a reward");
+                System.out.println(openCart.reward(REWARD) ? "utilised a reward of " + REWARD : "unable to utilise a reward");
 
                 System.out.println("----");
 
-                System.out.println(openCart.paymentAddress(new Address("Fred", "Bloggs", "123 The Street", "London", "UK", "NW6")) ? "the payment address for Fred Bloggs has been set" : "unable to set payment address");
+                System.out.println(openCart.paymentAddress(ADDRESS) ? "the payment address has been set" : "unable to set payment address");
                 System.out.println("payment methods = " + openCart.paymentMethods());
-                System.out.println(openCart.paymentMethod("cod") ? "set payment method to COD" : "unable to set payment method");
+                System.out.println(openCart.paymentMethod(PAYMENT_METHOD) ? "set payment method to " + PAYMENT_METHOD : "unable to set payment method");
 
                 System.out.println("----");
 
